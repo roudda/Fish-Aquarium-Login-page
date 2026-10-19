@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aqua World | Explore. Relax. Connect.</title>
+  
+  <!-- Google Fonts for Elegant Oceanic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Underwater Environment Elements -->
+  <div class="ocean-container" id="oceanContainer">
+    <!-- Sunlight Caustics & Shimmering Rays -->
+    <div class="sun-rays">
+      <div class="ray ray-1"></div>
+      <div class="ray ray-2"></div>
+      <div class="ray ray-3"></div>
+      <div class="ray ray-4"></div>
+      <div class="ray ray-5"></div>
+    </div>
+    <div class="water-caustics"></div>
+    <div class="water-overlay"></div>
+
+    <!-- Bioluminescent Ambient Plankton Particles -->
+    <div class="plankton-layer" id="planktonLayer"></div>
+
+    <!-- Ambient rising bubbles container -->
+    <div class="bubbles-layer" id="bubblesLayer"></div>
+
+    <!-- Water Ripple Click Interaction Canvas -->
+    <div class="water-ripple-layer" id="rippleLayer"></div>
+
+    <!-- Deep Sea Coral Reef Backdrop (Left Side) -->
+    <div class="coral-reef" id="coralReef">
+      <svg class="coral-svg" viewBox="0 0 550 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMax meet">
+        <defs>
+          <linearGradient id="coralGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec4899" />
+            <stop offset="50%" stop-color="#9d174d" />
+            <stop offset="100%" stop-color="#3b0764" />
+          </linearGradient>
+          <linearGradient id="coralGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fb7185" />
+            <stop offset="70%" stop-color="#be123c" />
+            <stop offset="100%" stop-color="#4c0519" />
+          </linearGradient>
+          <linearGradient id="anemoneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#22d3ee" />
+            <stop offset="60%" stop-color="#0284c7" />
+            <stop offset="100%" stop-color="#082f49" />
+          </linearGradient>
+          <linearGradient id="greenCoral" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4ade80" />
+            <stop offset="60%" stop-color="#15803d" />
+            <stop offset="100%" stop-color="#064e3b" />
+          </linearGradient>
+          <linearGradient id="rockGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="40%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="#020617" />
+          </linearGradient>
+        </defs>
+
+        <!-- Base Rock Formations with Deep Shading -->
+        <path d="M-50 900 C20 820 40 760 30 680 C20 620 70 540 50 460 C30 380 90 320 60 220 C40 160 0 100 -50 80 L-50 900 Z" fill="url(#rockGrad)" opacity="0.96" />
+        <path d="M-50 900 C60 880 120 790 100 700 C80 620 150 540 120 450 C90 370 140 280 100 200 L-50 150 L-50 900 Z" fill="url(#rockGrad)" opacity="0.82" />
+
+        <!-- Branching Acropora Corals -->
+        <g class="coral-branch branch-1" transform="translate(10, 320)">
+          <path d="M20 120 Q30 80 15 40 Q8 15 25 0 Q40 20 35 50 Q45 30 65 20 Q80 35 60 65 Q50 80 50 120 Z" fill="url(#coralGrad1)" />
+          <path d="M50 120 Q70 70 95 40 Q110 55 90 80 Q75 100 70 120 Z" fill="url(#coralGrad2)" />
+        </g>
+        <g class="coral-branch branch-2" transform="translate(60, 480)">
+          <path d="M10 140 C10 90 35 60 25 20 C40 15 45 40 40 70 C60 50 85 45 80 75 C70 95 60 115 50 140 Z" fill="url(#coralGrad2)" />
+          <path d="M45 140 C55 100 90 80 110 50 C125 65 105 95 85 115 C75 125 70 140 65 140 Z" fill="url(#coralGrad1)" />
+        </g>
+
+        <!-- Coral Colonies -->
+        <ellipse cx="70" cy="650" rx="60" ry="40" fill="url(#greenCoral)" opacity="0.88" />
+        <ellipse cx="110" cy="710" rx="50" ry="35" fill="url(#coralGrad1)" opacity="0.9" />
+        <ellipse cx="60" cy="780" rx="75" ry="50" fill="url(#greenCoral)" />
+
+        <!-- Sea Anemones with Swaying Tentacles -->
+        <g class="anemone-cluster" transform="translate(40, 560)">
+          <path class="tentacle t1" d="M20 60 Q10 30 25 5 Q35 30 30 60" fill="url(#anemoneGrad)" />
+          <path class="tentacle t2" d="M30 60 Q30 25 45 0 Q50 25 40 60" fill="url(#anemoneGrad)" />
+          <path class="tentacle t3" d="M40 60 Q50 25 65 8 Q60 35 50 60" fill="url(#anemoneGrad)" />
+          <path class="tentacle t4" d="M10 60 Q-5 35 5 15 Q15 35 20 60" fill="url(#anemoneGrad)" />
+        </g>
+
+        <!-- Lower Kelp & Sea Fans -->
+        <g class="sea-plant" transform="translate(100, 750)">
+          <path class="kelp-leaf" d="M10 150 Q-20 80 20 0 Q30 80 20 150 Z" fill="url(#greenCoral)" opacity="0.9" />
+          <path class="kelp-leaf" d="M25 150 Q60 90 35 20 Q30 90 35 150 Z" fill="url(#greenCoral)" opacity="0.75" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Active Marine Ecosystem & Swimmer Stage -->
+    <div class="fish-stage" id="fishStage"></div>
+  </div>
+
+  <!-- Main Web Content Layout -->
+  <div class="page-wrapper">
+    <!-- Top Header -->
+    <header class="top-header">
+      <div class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor">
+            <path d="M28.5 16C23 11 16 11 11 14C8 11.5 5 12 3 13.5C3.5 15 4 16 3 17.5C5 19 8 19.5 11 17C16 20 23 20 28.5 16ZM22 14.5C22.83 14.5 23.5 15.17 23.5 16C23.5 16.83 22.83 17.5 22 17.5C21.17 17.5 20.5 16.83 20.5 16C20.5 15.17 21.17 14.5 22 14.5Z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>AQUA WORLD</h1>
+          <p>Explore. Relax. Connect.</p>
+        </div>
+      </div>
+
+      <!-- Quick Controls: Audio & Species Filter -->
+      <div class="header-controls">
+        <button class="sound-toggle-btn" id="soundToggle" title="Toggle underwater ambience audio">
+          <span class="sound-icon sound-off">🔇</span>
+          <span class="sound-icon sound-on hidden">🔊</span>
+          <span class="sound-label">Ocean Sound</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area: Left Quote + Right Login Card -->
+    <main class="main-content">
+      <!-- Left Hero Section: Quote & Interactive Status -->
+      <section class="left-hero-section">
+        <div class="quote-card">
+          <blockquote class="ocean-quote">
+            <p>“The ocean is a world of wonder.”</p>
+            <cite>— Roudda Kumar Saha</cite>
+          </blockquote>
+        </div>
+
+        <!-- Privacy Status Indicator Badge -->
+        <div class="privacy-status-badge" id="privacyBadge">
+          <span class="badge-dot"></span>
+          <span class="badge-text" id="badgeText">Fishes & diver are swimming peacefully</span>
+        </div>
+      </section>
+
+      <!-- Right Glassmorphism Login Card -->
+      <section class="login-section">
+        <div class="glass-card" id="loginCard">
+          <!-- Animated Luminous Border Highlight -->
+          <div class="card-border-shimmer"></div>
+
+          <!-- Avatar Fish Badge with Interactive Eye Shielding -->
+          <div class="avatar-badge-container">
+            <div class="avatar-badge" id="avatarBadge" title="Click me!">
+              <div class="badge-glow"></div>
+              <div class="badge-water-waves">
+                <div class="badge-wave wave-1"></div>
+                <div class="badge-wave wave-2"></div>
+              </div>
+              
+              <!-- Interactive Badge Fish SVG -->
+              <svg class="badge-fish-svg" id="badgeFishSvg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="22" cy="22" r="3" fill="#ffffff" opacity="0.6" />
+                <circle cx="58" cy="18" r="2" fill="#ffffff" opacity="0.4" />
+                <circle cx="64" cy="30" r="2.5" fill="#ffffff" opacity="0.5" />
+
+                <!-- Fish Body -->
+                <g class="badge-fish-body" id="badgeFishBody">
+                  <path class="badge-tail" d="M22 40 L12 30 C15 38 15 42 12 50 Z" fill="#93c5fd" />
+                  <ellipse cx="38" cy="40" rx="18" ry="12" fill="#ffffff" />
+                  <path d="M34 28 C37 23 44 24 46 28 Z" fill="#93c5fd" />
+                  <path d="M35 52 C38 56 42 55 44 52 Z" fill="#93c5fd" />
+                  
+                  <g class="fish-eye-open" id="badgeEyeOpen">
+                    <circle cx="48" cy="37" r="3" fill="#0f172a" />
+                    <circle cx="49" cy="36" r="1" fill="#ffffff" />
+                  </g>
+                  
+                  <g class="fish-eye-closed hidden" id="badgeEyeClosed">
+                    <path d="M45 37 Q48 40 51 37" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" fill="none" />
+                  </g>
+                  <circle class="blush-dot hidden" id="blushDot" cx="44" cy="43" r="2.5" fill="#f43f5e" opacity="0.7" />
+                  
+                  <g class="badge-flipper" id="badgeFlipper">
+                    <path d="M38 41 C43 43 45 48 40 48 C36 48 35 44 38 41 Z" fill="#bfdbfe" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Title & Subtitle -->
+          <div class="card-header">
+            <h2 class="card-title">Welcome Back</h2>
+            <p class="card-subtitle">Login to continue your journey</p>
+          </div>
+
+          <!-- Login Form -->
+          <form class="login-form" id="loginForm" onsubmit="return false;">
+            <!-- Username / Email Field -->
+            <div class="form-group">
+              <div class="input-wrapper">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </span>
+                <input 
+                  type="text" 
+                  id="usernameInput" 
+                  class="form-input" 
+                  placeholder="Username or Email" 
+                  autocomplete="username" 
+                  required 
+                />
+              </div>
+            </div>
+
+            <!-- Password Field (Key Privacy trigger) -->
+            <div class="form-group">
+              <div class="input-wrapper">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </span>
+                <input 
+                  type="password" 
+                  id="passwordInput" 
+                  class="form-input password-input" 
+                  placeholder="Password" 
+                  autocomplete="current-password" 
+                  required 
+                />
+                <!-- Eye Toggle Button -->
+                <button type="button" class="eye-toggle-btn" id="eyeToggleBtn" title="Toggle password visibility">
+                  <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  <svg class="eye-icon eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="form-options">
+              <label class="checkbox-label" for="rememberMe">
+                <input type="checkbox" id="rememberMe" class="custom-checkbox" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-text">Remember me</span>
+              </label>
+              <a href="#" class="forgot-link" id="forgotPasswordLink">Forgot Password?</a>
+            </div>
+
+            <!-- Primary Login Action Button -->
+            <button type="submit" class="submit-login-btn" id="loginBtn">
+              <span class="btn-text">Login</span>
+              <span class="btn-shine"></span>
+            </button>
+
+            <!-- Divider -->
+            <div class="form-divider">
+              <span>OR</span>
+            </div>
+
+            <!-- Social Login Options -->
+            <div class="social-login-group">
+              <button type="button" class="social-btn google-btn" id="googleLoginBtn">
+                <svg class="social-icon" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/>
+                  <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/>
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                </svg>
+                <span>Continue with Google</span>
+              </button>
+
+              <button type="button" class="social-btn email-btn" id="emailLoginBtn">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>Continue with Email</span>
+              </button>
+            </div>
+
+            <!-- Sign Up Prompt -->
+            <div class="signup-prompt">
+              Don't have an account? <a href="#" class="signup-link">Sign Up</a>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Marine Features Bar -->
+    <footer class="bottom-section">
+      <div class="feature-cards-grid">
+        <div class="feature-card">
+          <div class="feature-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12c-4-3.5-9-3.5-13-1.5C5.5 8.5 3 9 1.5 10c.5 1 1 2 0 3c1.5 1 4 1.5 6.5-.5c4 2 9 2 13-1.5z"></path>
+              <circle cx="16" cy="11" r="1" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <h3 class="feature-title">Discover Marine Life</h3>
+          <p class="feature-desc">Explore amazing aquatic species and habitats.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+              <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+              <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Stay Relaxed</h3>
+          <p class="feature-desc">Relax with the peaceful beauty of aquariums.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Join Our Community</h3>
+          <p class="feature-desc">Connect with aquarium lovers around the world.</p>
+        </div>
+      </div>
+
+      <div class="copyright-bar">
+        <p>&copy; 2024 Aqua World. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- =========================================================
+       SVG CREATURE & SWIMMER GRAPHIC TEMPLATES
+       ========================================================= -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- ================= 1. THE SCUBA DIVER SWIMMER ================= -->
+      <g id="swimmer-diver">
+        <!-- Diver Torch Light Cone -->
+        <polygon class="diver-light-beam" points="165,58 320,10 320,110" fill="url(#diverTorchGrad)" opacity="0.32" />
+
+        <g class="diver-main-group">
+          <!-- Oxygen Tank on Back -->
+          <rect x="75" y="32" width="55" height="18" rx="9" fill="#e2e8f0" stroke="#0ea5e9" stroke-width="2" />
+          <rect x="68" y="36" width="9" height="10" rx="3" fill="#64748b" />
+          <path d="M72 41 C60 41 55 52 70 54" stroke="#38bdf8" stroke-width="2.5" fill="none" />
+
+          <!-- Back Leg & Fin (Animated Flutter Kick) -->
+          <g class="diver-leg-back">
+            <path d="M55 48 L22 42 L2 38" stroke="#0f172a" stroke-width="9" stroke-linecap="round" fill="none" />
+            <!-- Fin 1 -->
+            <polygon points="4,38 -25,28 -28,45 -6,44" fill="#0284c7" stroke="#38bdf8" stroke-width="1" />
+          </g>
+
+          <!-- Front Leg & Fin (Animated Flutter Kick Alternate) -->
+          <g class="diver-leg-front">
+            <path d="M55 52 L26 60 L6 64" stroke="#1e293b" stroke-width="9" stroke-linecap="round" fill="none" />
+            <!-- Fin 2 -->
+            <polygon points="8,64 -20,68 -24,85 -2,70" fill="#0284c7" stroke="#38bdf8" stroke-width="1" />
+          </g>
+
+          <!-- Diver Torso (Wetsuit with Cyan Stripes) -->
+          <path d="M60 48 C65 38 125 38 135 50 C130 65 75 66 60 48 Z" fill="#0f172a" stroke="#0284c7" stroke-width="1.8" />
+          <path d="M85 40 Q110 44 125 50" stroke="#38bdf8" stroke-width="2.5" fill="none" />
+
+          <!-- Diver Head with Hood and Mask -->
+          <circle cx="145" cy="50" r="14" fill="#0f172a" />
+          <!-- Dive Mask with Glowing Glass -->
+          <path d="M148 42 C156 42 158 54 152 56 L144 54 Z" fill="#38bdf8" opacity="0.85" stroke="#ffffff" stroke-width="1" />
+          <!-- Mask Strap -->
+          <path d="M136 48 L148 48" stroke="#e2e8f0" stroke-width="1.5" />
+          <!-- Regulator Mouthpiece -->
+          <ellipse cx="152" cy="58" rx="4" ry="3" fill="#64748b" />
+
+          <!-- Diver Arm & Hand (Can raise over mask to shield eyes) -->
+          <g class="diver-arm-group">
+            <path class="diver-arm" d="M110 52 L140 58 L165 58" stroke="#1e293b" stroke-width="7" stroke-linecap="round" fill="none" />
+            <!-- Dive Flashlight held in hand -->
+            <rect class="diver-torch" x="156" y="52" width="16" height="8" rx="3" fill="#fbbf24" stroke="#d97706" stroke-width="1" />
+            <circle class="diver-torch-bulb" cx="172" cy="56" r="3" fill="#ffffff" />
+          </g>
+        </g>
+      </g>
+
+      <!-- ================= 2. MAJESTIC MANTA RAY ================= -->
+      <g id="creature-manta">
+        <g class="manta-group">
+          <!-- Long Whip Tail -->
+          <path d="M50 70 C-10 70 -50 72 -80 78" stroke="#0c1d37" stroke-width="3" stroke-linecap="round" fill="none" />
+          
+          <!-- Large Diamond Wing Body -->
+          <path class="manta-wings" d="M180 70 C160 30 110 -15 80 0 C70 15 85 50 60 70 C85 90 70 125 80 140 C110 155 160 110 180 70 Z" fill="url(#mantaGrad)" stroke="#0c2340" stroke-width="2" />
+
+          <!-- White Wing Patterns / Highlights -->
+          <path d="M150 70 C135 45 105 20 88 28 C92 48 105 60 90 70 C105 80 92 92 88 112 C105 120 135 95 150 70 Z" fill="#08182b" opacity="0.6" />
+
+          <!-- Cephalic Horn Fins (Head) -->
+          <path d="M175 60 C195 56 205 64 195 70 C190 70 180 66 175 60 Z" fill="#1e3a5f" />
+          <path d="M175 80 C195 84 205 76 195 70 C190 70 180 74 175 80 Z" fill="#1e3a5f" />
+
+          <!-- Eyes on sides -->
+          <circle cx="170" cy="54" r="2.5" fill="#38bdf8" />
+          <circle cx="170" cy="86" r="2.5" fill="#38bdf8" />
+        </g>
+      </g>
+
+      <!-- ================= 3. BIOLUMINESCENT JELLYFISH ================= -->
+      <g id="creature-jellyfish">
+        <g class="jelly-group">
+          <!-- Flowing Inner Tentacles -->
+          <path class="jelly-tentacle jt-1" d="M40 70 Q30 110 45 150 Q35 180 40 210" stroke="#38bdf8" stroke-width="2" fill="none" opacity="0.75" />
+          <path class="jelly-tentacle jt-2" d="M50 70 Q60 115 45 160 Q55 190 50 220" stroke="#c084fc" stroke-width="2.5" fill="none" opacity="0.85" />
+          <path class="jelly-tentacle jt-3" d="M60 70 Q70 110 55 150 Q65 185 60 215" stroke="#38bdf8" stroke-width="2" fill="none" opacity="0.75" />
+          <path class="jelly-tentacle jt-4" d="M30 70 Q20 100 35 140 Q25 170 30 195" stroke="#818cf8" stroke-width="1.8" fill="none" opacity="0.6" />
+          <path class="jelly-tentacle jt-5" d="M70 70 Q80 100 65 140 Q75 170 70 195" stroke="#818cf8" stroke-width="1.8" fill="none" opacity="0.6" />
+
+          <!-- Pulsing Translucent Umbrella Bell -->
+          <path class="jelly-bell" d="M15 65 C15 15 85 15 85 65 C75 72 65 64 50 68 C35 64 25 72 15 65 Z" fill="url(#jellyGrad)" opacity="0.7" stroke="#a855f7" stroke-width="1.5" />
+          
+          <!-- Inner Bioluminescent Organ Glow -->
+          <ellipse cx="50" cy="45" rx="18" ry="14" fill="#38bdf8" opacity="0.5" filter="url(#jellyGlowFilter)" />
+          <ellipse cx="50" cy="42" rx="10" ry="7" fill="#ffffff" opacity="0.7" />
+        </g>
+      </g>
+
+      <!-- ================= 4. GREEN SEA TURTLE (HONU) ================= -->
+      <g id="creature-turtle">
+        <g class="turtle-group">
+          <!-- Back Flippers -->
+          <path d="M40 35 L20 20 C18 28 25 38 35 40 Z" fill="#15803d" stroke="#166534" stroke-width="1.2" />
+          <path d="M40 75 L20 90 C18 82 25 72 35 70 Z" fill="#15803d" stroke="#166534" stroke-width="1.2" />
+
+          <!-- Oval Shell (Carapace) with Scute Pattern -->
+          <ellipse class="turtle-shell" cx="75" cy="55" rx="45" ry="32" fill="url(#turtleShellGrad)" stroke="#14532d" stroke-width="2" />
+          <!-- Shell Scutes -->
+          <ellipse cx="75" cy="55" rx="30" ry="20" fill="none" stroke="#ca8a04" stroke-width="1.5" opacity="0.6" />
+          <path d="M45 55 L105 55 M75 35 L75 75" stroke="#ca8a04" stroke-width="1.5" opacity="0.6" />
+
+          <!-- Head and Neck -->
+          <path d="M115 50 C125 45 140 45 145 55 C140 65 125 65 115 60 Z" fill="#22c55e" stroke="#15803d" stroke-width="1.5" />
+          <circle cx="138" cy="51" r="2.5" fill="#0f172a" />
+          <circle cx="137.5" cy="50" r="0.8" fill="#ffffff" />
+
+          <!-- Front Flippers (Rowing Motion) -->
+          <g class="turtle-flipper-top">
+            <path d="M95 35 C110 15 135 5 145 15 C135 30 115 40 95 42 Z" fill="#16a34a" stroke="#15803d" stroke-width="1.5" />
+          </g>
+          <g class="turtle-flipper-bottom">
+            <path d="M95 75 C110 95 135 105 145 95 C135 80 115 70 95 68 Z" fill="#16a34a" stroke="#15803d" stroke-width="1.5" />
+          </g>
+        </g>
+      </g>
+
+      <!-- ================= 5. MOORISH IDOL FISH ================= -->
+      <g id="fish-moorish-idol">
+        <g class="fish-body-group">
+          <!-- Extremely Long White Dorsal Banner Streamer -->
+          <path class="streamer-fin" d="M85 30 C100 -30 140 -60 170 -85 C145 -50 115 -20 95 28 Z" fill="#ffffff" opacity="0.9" stroke="#cbd5e1" stroke-width="1" />
+
+          <!-- Disc Body with Black, White & Yellow Bands -->
+          <path d="M35 55 C35 22 75 15 120 30 C135 40 142 55 135 70 C115 88 75 90 35 55 Z" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" />
+
+          <!-- Black Vertical Band 1 (Through Eye) -->
+          <path d="M55 24 C65 24 62 60 55 75 C48 65 48 35 55 24 Z" fill="#0f172a" />
+          <!-- Black Vertical Band 2 (Mid Body) -->
+          <path d="M95 19 C115 22 120 70 105 84 C95 80 90 25 95 19 Z" fill="#0f172a" />
+
+          <!-- Canary Yellow Accent on Snout & Rear -->
+          <polygon points="25,55 45,45 42,65" fill="#facc15" />
+          <path d="M115 35 C130 45 132 65 118 75 Z" fill="#facc15" />
+
+          <!-- Eye -->
+          <circle cx="56" cy="42" r="4.5" fill="#38bdf8" />
+          <circle cx="56" cy="42" r="2.8" fill="#020617" />
+          <circle cx="55" cy="41" r="1" fill="#ffffff" />
+
+          <!-- Tail -->
+          <g class="fish-tail-group">
+            <path d="M130 55 L155 38 C150 50 150 60 155 72 L130 55 Z" fill="#0f172a" stroke="#38bdf8" stroke-width="1" />
+            <rect x="150" y="44" width="4" height="22" fill="#ffffff" />
+          </g>
+        </g>
+      </g>
+
+      <!-- ================= 6. BLUE TANG (DORY) ================= -->
+      <g id="fish-blue-tang">
+        <g class="fish-body-group">
+          <path class="pectoral-back" d="M85 70 C70 65 60 75 62 85 C65 92 80 82 85 70 Z" fill="#eab308" />
+          <path d="M60 30 C90 10 160 12 180 38 C155 24 100 22 60 30 Z" fill="#0f2b66" />
+          <path d="M85 105 C120 125 160 115 175 92 C150 108 110 112 85 105 Z" fill="#0f2b66" />
+          <path class="main-body" d="M30 65 C30 25 90 18 160 35 C190 42 205 65 190 85 C165 110 90 115 30 65 Z" fill="url(#blueTangGradient)" />
+          <path d="M65 38 C115 28 175 40 185 62 C195 82 170 95 145 92 C125 89 125 75 145 72 C160 70 165 60 155 52 C135 42 95 45 75 55 C65 60 55 50 65 38 Z" fill="#061226" />
+          <ellipse cx="180" cy="65" rx="5" ry="2" fill="#ffffff" />
+          
+          <circle cx="55" cy="52" r="7" fill="#0b172a" />
+          <circle cx="53" cy="50" r="2.5" fill="#ffffff" />
+          <ellipse class="fish-blush hidden" cx="58" cy="64" rx="6" ry="4" fill="#f43f5e" opacity="0.6" />
+          <path class="fish-brow hidden" d="M48 45 Q55 42 62 48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" />
+
+          <g class="fish-pectoral-front">
+            <path d="M80 62 C95 55 110 65 105 80 C98 90 82 78 80 62 Z" fill="#fbbf24" stroke="#d97706" stroke-width="1.5" />
+          </g>
+
+          <g class="fish-tail-group">
+            <path d="M185 65 L225 35 C220 55 220 75 225 95 L185 65 Z" fill="#eab308" stroke="#ca8a04" stroke-width="1.5" />
+            <path d="M225 35 C218 55 218 75 225 95 C232 75 232 55 225 35 Z" fill="#0284c7" opacity="0.7" />
+          </g>
+        </g>
+      </g>
+
+      <!-- ================= 7. CLOWNFISH (NEMO) ================= -->
+      <g id="fish-clownfish">
+        <g class="fish-body-group">
+          <path d="M45 22 C60 10 95 12 110 28 C90 20 65 18 45 22 Z" fill="#ea580c" stroke="#18181b" stroke-width="1.5" />
+          <path d="M65 72 C80 82 100 80 110 68 C95 72 80 72 65 72 Z" fill="#ea580c" stroke="#18181b" stroke-width="1.5" />
+          <path d="M20 48 C20 22 65 16 115 30 C135 36 145 50 135 65 C115 80 65 82 20 48 Z" fill="url(#clownfishGradient)" />
+          
+          <path d="M38 25 C45 24 50 35 48 56 C46 68 40 70 34 65 C40 50 42 35 38 25 Z" fill="#ffffff" stroke="#18181b" stroke-width="2" />
+          <path d="M74 19 C84 19 86 35 83 50 C80 65 84 76 76 75 C70 74 72 58 74 48 C76 35 70 25 74 19 Z" fill="#ffffff" stroke="#18181b" stroke-width="2" />
+          <path d="M120 34 C126 36 126 58 120 63 C116 61 117 40 120 34 Z" fill="#ffffff" stroke="#18181b" stroke-width="1.8" />
+
+          <circle cx="34" cy="38" r="5.5" fill="#f97316" />
+          <circle cx="34" cy="38" r="3.5" fill="#09090b" />
+          <circle cx="33" cy="36.5" r="1.2" fill="#ffffff" />
+
+          <g class="fish-pectoral-front">
+            <ellipse cx="56" cy="55" rx="10" ry="6" transform="rotate(25 56 55)" fill="#ea580c" stroke="#18181b" stroke-width="1.5" />
+            <path d="M62 52 C65 56 64 60 60 62" stroke="#ffffff" stroke-width="1.5" fill="none" />
+          </g>
+
+          <g class="fish-tail-group">
+            <path d="M130 48 L155 30 C150 45 150 55 155 70 L130 48 Z" fill="#ea580c" stroke="#18181b" stroke-width="1.8" />
+            <path d="M152 35 C148 45 148 55 152 65 C155 55 155 45 152 35 Z" fill="#ffffff" />
+          </g>
+        </g>
+      </g>
+
+      <!-- ================= 8. YELLOW TANG ================= -->
+      <g id="fish-yellow-tang">
+        <g class="fish-body-group">
+          <path d="M25 50 C25 15 65 5 110 25 C130 35 140 50 130 65 C110 85 65 92 25 50 Z" fill="url(#yellowTangGradient)" stroke="#ca8a04" stroke-width="1.2" />
+          <path d="M50 16 C80 -2 115 5 125 30 C105 18 75 14 50 16 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.2" />
+          <path d="M55 84 C85 102 115 95 125 70 C105 82 75 84 55 84 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.2" />
+          <rect x="118" y="48" width="8" height="3" rx="1.5" fill="#ffffff" stroke="#854d0e" stroke-width="0.8" />
+          <circle cx="42" cy="42" r="5" fill="#0f172a" />
+          <circle cx="40.5" cy="40.5" r="1.5" fill="#ffffff" />
+
+          <g class="fish-pectoral-front">
+            <path d="M60 52 C70 48 80 55 76 66 C70 70 60 62 60 52 Z" fill="#fde047" opacity="0.85" stroke="#ca8a04" stroke-width="1" />
+          </g>
+
+          <g class="fish-tail-group">
+            <path d="M128 50 L155 35 C150 48 150 52 155 65 L128 50 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.2" />
+          </g>
+        </g>
+      </g>
+
+      <!-- ================= GRADIENT DEFINITIONS ================= -->
+      <linearGradient id="diverTorchGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="30%" stop-color="#7dd3fc" stop-opacity="0.5" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+      </linearGradient>
+
+      <linearGradient id="mantaGrad" x1="100%" y1="50%" x2="0%" y2="50%">
+        <stop offset="0%" stop-color="#0f2b48" />
+        <stop offset="60%" stop-color="#16385e" />
+        <stop offset="100%" stop-color="#091829" />
+      </linearGradient>
+
+      <linearGradient id="jellyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+        <stop offset="50%" stop-color="#c084fc" stop-opacity="0.75" />
+        <stop offset="100%" stop-color="#e879f9" stop-opacity="0.4" />
+      </linearGradient>
+
+      <linearGradient id="turtleShellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#854d0e" />
+        <stop offset="40%" stop-color="#166534" />
+        <stop offset="100%" stop-color="#14532d" />
+      </linearGradient>
+
+      <linearGradient id="blueTangGradient" x1="0%" y1="0%" x2="100%" y2="80%">
+        <stop offset="0%" stop-color="#2563eb" />
+        <stop offset="60%" stop-color="#1d4ed8" />
+        <stop offset="100%" stop-color="#1e3a8a" />
+      </linearGradient>
+
+      <linearGradient id="clownfishGradient" x1="0%" y1="0%" x2="100%" y2="80%">
+        <stop offset="0%" stop-color="#fb923c" />
+        <stop offset="50%" stop-color="#f97316" />
+        <stop offset="100%" stop-color="#c2410c" />
+      </linearGradient>
+
+      <linearGradient id="yellowTangGradient" x1="0%" y1="0%" x2="100%" y2="80%">
+        <stop offset="0%" stop-color="#fef08a" />
+        <stop offset="50%" stop-color="#facc15" />
+        <stop offset="100%" stop-color="#eab308" />
+      </linearGradient>
+
+      <filter id="jellyGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="5" result="glow" />
+        <feComposite in="SourceGraphic" in2="glow" operator="over" />
+      </filter>
+    </defs>
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+</html>
